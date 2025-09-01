@@ -4,20 +4,7 @@ const Hero: React.FC = () => {
   return (
     <section 
       id="hero" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{
-        background: `
-          linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%),
-          repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 2px,
-            rgba(191, 161, 74, 0.03) 2px,
-            rgba(191, 161, 74, 0.03) 4px
-          )
-        `
-      }}
-    >
+      className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Grain overlay */}
       <div className="grain absolute inset-0 pointer-events-none"></div>
       

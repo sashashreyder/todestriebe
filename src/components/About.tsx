@@ -11,22 +11,6 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="py-20 relative">
-      {/* Background with subtle pattern */}
-      <div 
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              45deg,
-              #bfa14a,
-              #bfa14a 1px,
-              transparent 1px,
-              transparent 10px
-            )
-          `
-        }}
-      ></div>
-      
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
