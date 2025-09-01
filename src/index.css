@@ -1,0 +1,129 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia:wght@400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #f1f5f9;
+  background-color: #0a0a0a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #bfa14a;
+  text-decoration: inherit;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #c8ad5b;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'UnifrakturMaguntia', serif;
+  line-height: 1.1;
+  color: #f1f5f9;
+}
+
+h1 {
+  font-size: 3.2em;
+}
+
+button {
+  border-radius: 4px;
+  border: 1px solid #bfa14a;
+  padding: 0.8em 1.6em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: transparent;
+  color: #bfa14a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+button:hover {
+  background-color: #bfa14a;
+  color: #0a0a0a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(191, 161, 74, 0.3);
+}
+button:focus,
+button:focus-visible {
+  outline: 2px solid #bfa14a;
+  outline-offset: 2px;
+}
+
+/* Grain effect */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  z-index: 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bfa14a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c8ad5b;
+}
+
+/* Utility classes */
+.text-gold { color: #bfa14a; }
+.text-gold-secondary { color: #c8ad5b; }
+.bg-gold { background-color: #bfa14a; }
+.bg-coal { background-color: #0a0a0a; }
+.border-gold { border-color: #bfa14a; }
+
+/* Animations */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-flicker { animation: flicker 2s infinite alternate; }
+.animate-shimmer { animation: shimmer 2s infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
