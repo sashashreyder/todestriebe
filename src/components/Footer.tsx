@@ -1,17 +1,19 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-gold/20 bg-coal/50">
-      <div className="container mx-auto px-4">
+    <footer className="py-12 border-t border-gold/20 bg-coal/50 px-4">
+      <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 items-center">
           {/* Logo */}
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-blackletter text-gold mb-2">TODESTRIEBE</h3>
             <p className="text-muted text-sm">
-              Through darkness, we find truth
+              {t.footer.tagline}
             </p>
           </div>
 
@@ -19,19 +21,19 @@ const Footer: React.FC = () => {
           <div className="text-center">
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <a href="#about" className="text-muted hover:text-gold transition-colors duration-300">
-                About
+                {t.nav.about}
               </a>
               <a href="#tour" className="text-muted hover:text-gold transition-colors duration-300">
-                Tour
+                {t.nav.tour}
               </a>
               <a href="#shop" className="text-muted hover:text-gold transition-colors duration-300">
-                Shop
+                {t.nav.shop}
               </a>
               <a href="#gallery" className="text-muted hover:text-gold transition-colors duration-300">
-                Gallery
+                {t.nav.gallery}
               </a>
               <a href="#contact" className="text-muted hover:text-gold transition-colors duration-300">
-                Contact
+                {t.nav.contact}
               </a>
             </div>
           </div>
@@ -57,7 +59,7 @@ const Footer: React.FC = () => {
             </div>
             <div className="text-xs text-muted">
               <a href="#" className="hover:text-gold transition-colors duration-300">
-                Privacy Policy
+                {t.footer.privacyPolicy}
               </a>
             </div>
           </div>
@@ -68,9 +70,9 @@ const Footer: React.FC = () => {
           <p className="text-muted text-sm">
             © {currentYear} Todestriebe. All rights reserved. 
             <span className="mx-2">|</span>
-            <span className="text-gold">Black Metal</span>
+            <span className="text-gold">{t.footer.blackMetal}</span>
             <span className="mx-2">|</span>
-            <span className="text-gold">Worldwide</span>
+            <span className="text-gold">{t.footer.worldwide}</span>
           </p>
         </div>
       </div>

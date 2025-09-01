@@ -6,21 +6,28 @@ import Shop from './components/Shop';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Starfield from './components/Starfield';
+import BackgroundMusic from './components/BackgroundMusic';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 function App() {
   return (
-    <div className="min-h-screen bg-coal text-text-light">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Tour />
-        <Shop />
-        <Gallery />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen text-text-light relative">
+        <Starfield />
+        <Header />
+        <main className="relative z-10">
+          <Hero />
+          <About />
+          <Tour />
+          <Shop />
+          <Gallery />
+          <Contact />
+        </main>
+        <Footer />
+        <BackgroundMusic />
+      </div>
+    </LanguageProvider>
   );
 }
 

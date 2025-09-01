@@ -1,8 +1,11 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import { tours } from '../data/tours';
 import { CrossDivider } from '../assets/CrossDivider';
 
 const Tour: React.FC = () => {
+  const { t } = useLanguage();
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -14,7 +17,7 @@ const Tour: React.FC = () => {
   };
 
   return (
-    <section id="tour" className="py-20 relative">
+    <section id="tour" className="py-20 relative px-4">
       {/* Background pattern */}
       <div 
         className="absolute inset-0 opacity-5"
@@ -31,14 +34,14 @@ const Tour: React.FC = () => {
         }}
       ></div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
             <CrossDivider size={32} />
           </div>
           <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">
-            Tour
+            {t.tour.title}
           </h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
         </div>
@@ -77,15 +80,15 @@ const Tour: React.FC = () => {
                 <div className="text-center md:text-right space-y-2">
                   {tour.ticketsUrl ? (
                     <button className="w-full md:w-auto px-6 py-2 text-sm">
-                      Get Tickets
+                      {t.tour.getTickets}
                     </button>
                   ) : (
                     <button className="w-full md:w-auto px-6 py-2 text-sm bg-gold text-coal">
-                      RSVP
+                      {t.tour.rsvp}
                     </button>
                   )}
                   <div className="text-xs text-muted">
-                    {tour.ticketsUrl ? 'Tickets available' : 'Free entry'}
+                    {tour.ticketsUrl ? t.tour.ticketsAvailable : t.tour.freeEntry}
                   </div>
                 </div>
               </div>
@@ -99,17 +102,11 @@ const Tour: React.FC = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <p className="text-muted mb-6 max-w-2xl mx-auto">
-            Can't make it to a show? Follow us on social media for updates, 
-            behind-the-scenes content, and exclusive merchandise drops.
+            {t.tour.followDescription}
           </p>
           <button className="px-8 py-3 text-lg">
-            Follow Updates
+            {t.tour.followUpdates}
           </button>
-        </div>
-
-        {/* Bottom divider */}
-        <div className="flex justify-center mt-16">
-          <CrossDivider size={32} />
         </div>
       </div>
     </section>

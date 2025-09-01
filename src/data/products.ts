@@ -57,3 +57,4 @@ export const products: Product[] = [
     description: 'CD version of the album'
   }
 ];
+

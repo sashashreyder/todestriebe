@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { products } from '../data/products';
+import { useLanguage } from '../contexts/LanguageContext';
 import { SpikeDivider } from '../assets/SpikeDivider';
 
 const Shop: React.FC = () => {
+  const { t } = useLanguage();
   const [, setCartItems] = useState<string[]>([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -14,21 +15,36 @@ const Shop: React.FC = () => {
     setTimeout(() => setShowToast(false), 3000);
   };
 
-  const categories = ['All', 'Clothing', 'Music', 'Merchandise'];
+  const categories = [
+    { key: 'All', label: t.shop.all },
+    { key: 'Clothing', label: t.shop.clothing },
+    { key: 'Music', label: t.shop.music },
+    { key: 'Merchandise', label: t.shop.merchandise }
+  ];
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  // Реальные товары с изображениями из папки
+  const products = [
+    { id: 'tee1', title: 'Todestriebe Tee', price: 35, image: '/img/б2т.jpg', category: 'Clothing', description: 'Black metal band t-shirt with band logo' },
+    { id: 'vinyl1', title: 'LP "Abyssal Rites"', price: 29, image: '/img/б4т.jpg', category: 'Music', description: 'Limited edition vinyl record' },
+    { id: 'hoodie1', title: 'Todestriebe Hoodie', price: 55, image: '/img/б5т.jpg', category: 'Clothing', description: 'Dark hoodie with embroidered logo' },
+    { id: 'poster1', title: 'Tour Poster 2025', price: 15, image: '/img/б7т.jpg', category: 'Merchandise', description: 'Limited tour poster' },
+    { id: 'patch1', title: 'Band Patch', price: 8, image: '/img/morkbeast.jpg', category: 'Merchandise', description: 'Embroidered band patch' },
+    { id: 'cd1', title: 'CD "Abyssal Rites"', price: 18, image: '/img/photo_2024-07-11_12-15-11.jpg', category: 'Music', description: 'CD version of the album' }
+  ];
 
   const filteredProducts = selectedCategory === 'All' 
     ? products 
     : products.filter(product => product.category === selectedCategory);
 
   return (
-    <section id="shop" className="py-20 relative">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="shop" className="py-20 relative px-4">
+      <div className="relative z-10">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
             <SpikeDivider rotation={0} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">Shop</h2>
+          <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">{t.shop.title}</h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
         </div>
 
@@ -36,32 +52,30 @@ const Shop: React.FC = () => {
           <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
               <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
+                key={category.key}
+                onClick={() => setSelectedCategory(category.key)}
                 className={`px-4 py-2 text-sm border border-gold/20 rounded-md transition-all duration-300 ${
-                  selectedCategory === category
+                  selectedCategory === category.key
                     ? 'bg-gold text-coal border-gold'
                     : 'text-gold hover:border-gold/40 hover:bg-gold/10'
                 }`}
               >
-                {category}
+                {category.label}
               </button>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
           {filteredProducts.map((product) => (
             <div key={product.id} className="group border border-gold/20 rounded-lg bg-coal/30 hover:border-gold/40 transition-all duration-300 overflow-hidden">
-              <div className="aspect-square bg-gradient-to-br from-gray-800 to-coal relative overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center text-muted">
-                    <svg className="w-20 h-20 mx-auto mb-2 opacity-50" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                    </svg>
-                    <p className="text-xs">{product.title}</p>
-                  </div>
-                </div>
+              <div className="aspect-square relative overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
 
               <div className="p-6">
@@ -70,7 +84,7 @@ const Shop: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-gold font-semibold text-xl">${product.price}</span>
                   <button onClick={() => addToCart(product.id, product.title)} className="px-4 py-2 text-sm">
-                    Add to Cart
+                    {t.shop.addToCart}
                   </button>
                 </div>
               </div>
@@ -80,9 +94,9 @@ const Shop: React.FC = () => {
 
         <div className="text-center">
           <p className="text-muted mb-6 max-w-2xl mx-auto">
-            All merchandise is limited edition and hand-numbered. Get your piece of the Todestriebe legacy before it's gone.
+            {t.shop.shopDescription}
           </p>
-          <button className="px-8 py-3 text-lg">View All Products</button>
+          <button className="px-8 py-3 text-lg">{t.shop.viewAllProducts}</button>
         </div>
 
         <div className="flex justify-center mt-16">

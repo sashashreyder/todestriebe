@@ -27,3 +27,4 @@ export const SpikeDivider: React.FC<SpikeDividerProps> = ({
     </svg>
   );
 };
+

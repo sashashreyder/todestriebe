@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import { SpikeDivider } from '../assets/SpikeDivider';
 
 const About: React.FC = () => {
+  const { t } = useLanguage();
+
   const bandMembers = [
     { name: 'Mephistopheles', instrument: 'Vocals & Guitar', role: 'Founder' },
     { name: 'Azrael', instrument: 'Lead Guitar', role: 'Lead Guitarist' },
@@ -10,50 +13,59 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 relative">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="about" className="py-20 relative px-4">
+      {/* Background with subtle pattern */}
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(
+              45deg,
+              #bfa14a,
+              #bfa14a 1px,
+              transparent 1px,
+              transparent 10px
+            )
+          `
+        }}
+      ></div>
+      
+      <div className="relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
             <SpikeDivider rotation={45} />
           </div>
           <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">
-            About
+            {t.about.title}
           </h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
         </div>
 
         {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-16 max-w-6xl mx-auto">
           {/* Text Content */}
           <div className="space-y-6">
             <p className="text-lg text-text-light leading-relaxed">
-              Formed in the depths of 2018, Todestriebe emerged from the shadows of the underground 
-              black metal scene. Our name, derived from German philosophy, represents the drive toward 
-              death and destruction that exists within all living beings.
+              {t.about.paragraph1}
             </p>
             <p className="text-lg text-text-light leading-relaxed">
-              We channel this primal energy through our music, creating atmospheric black metal that 
-              explores themes of mortality, existentialism, and the human condition. Each performance 
-              is a ritual, each album a journey into the abyss of human consciousness.
+              {t.about.paragraph2}
             </p>
             <p className="text-lg text-text-light leading-relaxed">
-              Our sound combines traditional black metal elements with atmospheric and post-metal 
-              influences, creating a unique sonic experience that transcends genre boundaries.
+              {t.about.paragraph3}
             </p>
           </div>
 
-          {/* Band Photo Placeholder */}
+          {/* Band Photo */}
           <div className="relative">
-            <div className="aspect-square bg-gradient-to-br from-coal to-gray-800 rounded-lg border border-gold/20 overflow-hidden">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center text-muted">
-                  <svg className="w-24 h-24 mx-auto mb-4 opacity-50" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
-                  <p className="text-sm">Band Photo</p>
-                </div>
-              </div>
+            <div className="aspect-square rounded-lg border border-gold/20 overflow-hidden">
+              <img 
+                src="/img/IMG_20240114_030134_434.jpg" 
+                alt="Todestriebe band photo" 
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
             {/* Decorative corner elements */}
             <div className="absolute -top-2 -left-2 w-4 h-4 border-l-2 border-t-2 border-gold"></div>
@@ -63,8 +75,8 @@ const About: React.FC = () => {
 
         {/* Band Members */}
         <div className="text-center">
-          <h3 className="text-2xl font-blackletter text-gold mb-8">Band Members</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h3 className="text-2xl font-blackletter text-gold mb-8">{t.about.bandMembers}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {bandMembers.map((member) => (
               <div 
                 key={member.name}

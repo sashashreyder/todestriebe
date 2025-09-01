@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,14 +23,16 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header
+    <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-coal/95 backdrop-blur-sm' : 'bg-transparent'
+        scrolled 
+          ? 'bg-coal/95 backdrop-blur-sm border-b border-gold' 
+          : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo with glowing background */}
           <div className="flex items-center">
             <div className="relative group">
               {/* золотая подложка */}
@@ -60,11 +65,11 @@ const Header: React.FC = () => {
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {[
-              { id: 'about', label: 'About' },
-              { id: 'tour', label: 'Tour' },
-              { id: 'shop', label: 'Shop' },
-              { id: 'gallery', label: 'Gallery' },
-              { id: 'contact', label: 'Contact' }
+              { id: 'about', label: t.nav.about },
+              { id: 'tour', label: t.nav.tour },
+              { id: 'shop', label: t.nav.shop },
+              { id: 'gallery', label: t.nav.gallery },
+              { id: 'contact', label: t.nav.contact }
             ].map((item) => (
               <button
                 key={item.id}
@@ -76,21 +81,17 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Mobile menu button */}
-          <button className="md:hidden text-gold">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
+          {/* Language Switcher and Mobile menu */}
+          <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
+            <button className="md:hidden text-gold">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -98,4 +99,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-

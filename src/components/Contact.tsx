@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import { CrossDivider } from '../assets/CrossDivider';
 
 const Contact: React.FC = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,23 +34,23 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 relative">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="contact" className="py-20 relative px-4">
+      <div className="relative z-10">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
             <CrossDivider size={32} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">Contact</h2>
+          <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">{t.contact.title}</h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 items-start max-w-6xl mx-auto">
           {/* Contact Form */}
           <div>
-            <h3 className="text-2xl font-blackletter text-gold mb-6">Send us a message</h3>
+            <h3 className="text-2xl font-blackletter text-gold mb-6">{t.contact.sendMessage}</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-text-light mb-2">Name</label>
+                <label htmlFor="name" className="block text-text-light mb-2">{t.contact.name}</label>
                 <input
                   type="text"
                   id="name"
@@ -57,12 +59,12 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-coal border border-gold/20 rounded-md text-text-light focus:border-gold focus:outline-none transition-colors duration-300"
-                  placeholder="Your name"
+                  placeholder={t.contact.name}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-text-light mb-2">Email</label>
+                <label htmlFor="email" className="block text-text-light mb-2">{t.contact.email}</label>
                 <input
                   type="email"
                   id="email"
@@ -71,12 +73,12 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-coal border border-gold/20 rounded-md text-text-light focus:border-gold focus:outline-none transition-colors duration-300"
-                  placeholder="your@email.com"
+                  placeholder={t.contact.email}
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-text-light mb-2">Subject</label>
+                <label htmlFor="subject" className="block text-text-light mb-2">{t.contact.subject}</label>
                 <select
                   id="subject"
                   name="subject"
@@ -84,15 +86,15 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-coal border border-gold/20 rounded-md text-text-light focus:border-gold focus:outline-none transition-colors duration-300"
                 >
-                  <option value="general">General Inquiry</option>
-                  <option value="booking">Booking</option>
-                  <option value="press">Press</option>
-                  <option value="merchandise">Merchandise</option>
+                  <option value="general">{t.contact.generalInquiry}</option>
+                  <option value="booking">{t.contact.booking}</option>
+                  <option value="press">{t.contact.press}</option>
+                  <option value="merchandise">{t.contact.merchandise}</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-text-light mb-2">Message</label>
+                <label htmlFor="message" className="block text-text-light mb-2">{t.contact.message}</label>
                 <textarea
                   id="message"
                   name="message"
@@ -101,12 +103,12 @@ const Contact: React.FC = () => {
                   required
                   rows={5}
                   className="w-full px-4 py-3 bg-coal border border-gold/20 rounded-md text-text-light focus:border-gold focus:outline-none transition-colors duration-300 resize-none"
-                  placeholder="Your message..."
+                  placeholder={t.contact.message}
                 />
               </div>
 
               <button type="submit" className="w-full px-8 py-3 text-lg">
-                Send Message
+                {t.contact.sendMessageButton}
               </button>
             </form>
           </div>
@@ -114,7 +116,7 @@ const Contact: React.FC = () => {
           {/* Social Links & Info */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-blackletter text-gold mb-6">Follow us</h3>
+              <h3 className="text-2xl font-blackletter text-gold mb-6">{t.contact.followUs}</h3>
               <div className="grid grid-cols-2 gap-4">
                 {socialLinks.map((social) => (
                   <a
@@ -132,7 +134,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="text-2xl font-blackletter text-gold mb-6">Get in touch</h3>
+              <h3 className="text-2xl font-blackletter text-gold mb-6">{t.contact.getInTouch}</h3>
               <div className="space-y-4 text-text-light">
                 <div className="flex items-center space-x-3">
                   <svg className="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 24 24">
@@ -150,17 +152,17 @@ const Contact: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="text-2xl font-blackletter text-gold mb-6">Newsletter</h3>
+              <h3 className="text-2xl font-blackletter text-gold mb-6">{t.contact.newsletter}</h3>
               <p className="text-muted mb-4">
-                Stay updated with tour dates, new releases, and exclusive content.
+                {t.contact.newsletterDescription}
               </p>
               <div className="flex space-x-2">
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={t.contact.email}
                   className="flex-1 px-4 py-3 bg-coal border border-gold/20 rounded-md text-text-light focus:border-gold focus:outline-none transition-colors duration-300"
                 />
-                <button className="px-6 py-3">Subscribe</button>
+                <button className="px-6 py-3">{t.contact.subscribe}</button>
               </div>
             </div>
           </div>
@@ -175,7 +177,7 @@ const Contact: React.FC = () => {
       {/* Toast Notification */}
       {showToast && (
         <div className="fixed bottom-8 right-8 bg-gold text-coal px-6 py-3 rounded-lg shadow-lg z-50">
-          Message sent successfully!
+          {t.contact.messageSent}
         </div>
       )}
     </section>
