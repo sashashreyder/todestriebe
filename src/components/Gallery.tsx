@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { CrossDivider } from '../assets/CrossDivider';
 
+type GalleryItem = {
+  id: string;
+  src: string;
+  alt: string;
+  title: string;
+};
+
 const Gallery: React.FC = () => {
   const { t } = useLanguage();
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
-  // Реальные изображения из папки
-  const galleryImages = [
+  const galleryImages: GalleryItem[] = [
     { id: '1', src: '/img/IMG_20230923_204125.jpg', alt: 'Live performance at Oslo', title: 'Oslo Night' },
     { id: '2', src: '/img/IMG_20240114_030134_434.jpg', alt: 'Band photo in studio', title: 'Studio Session' },
     { id: '3', src: '/img/б2т.jpg', alt: 'Concert crowd', title: 'Crowd Energy' },
@@ -16,21 +22,13 @@ const Gallery: React.FC = () => {
     { id: '6', src: '/img/б7т.jpg', alt: 'Merchandise display', title: 'Merch Table' },
     { id: '7', src: '/img/morkbeast.jpg', alt: 'Soundcheck', title: 'Soundcheck' },
     { id: '8', src: '/img/photo_2024-07-11_12-15-11.jpg', alt: 'Fans at concert', title: 'Fan Moment' },
-    { id: '9', src: '/img/Todestriebe_distorted_logo_6.png', alt: 'Guitar closeup', title: 'Instrument Detail' }
   ];
 
-  const openModal = (image: any) => {
-    setSelectedImage(image);
-  };
+  const openModal = (image: GalleryItem) => setSelectedImage(image);
+  const closeModal = () => setSelectedImage(null);
 
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
+  const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key === 'Escape') closeModal();
   };
 
   return (
@@ -40,25 +38,31 @@ const Gallery: React.FC = () => {
           <div className="flex justify-center mb-6">
             <CrossDivider size={32} />
           </div>
-          <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">{t.gallery.title}</h2>
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-blackletter text-gold mb-4">
+            {t.gallery.title}
+          </h2>
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16 max-w-6xl mx-auto">
           {galleryImages.map((image) => (
             <div
               key={image.id}
               onClick={() => openModal(image)}
               className="group cursor-pointer aspect-square bg-gradient-to-br from-gray-800 to-coal rounded-lg border border-gold/20 overflow-hidden hover:border-gold/40 transition-all duration-300"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => (e.key === 'Enter' ? openModal(image) : null)}
+              aria-label={`${t.gallery.clickToView}: ${image.title}`}
             >
               <div className="w-full h-full relative">
-                <img 
-                  src={image.src} 
+                <img
+                  src={image.src}
                   alt={image.alt}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                
+
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-gold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="text-gold text-center">
@@ -97,16 +101,17 @@ const Gallery: React.FC = () => {
             <button
               onClick={closeModal}
               className="absolute -top-12 right-0 text-gold hover:text-gold-secondary transition-colors duration-300"
+              aria-label="Close"
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            
+
             <div className="bg-coal border border-gold/20 rounded-lg p-6">
               <div className="aspect-video rounded-lg mb-4 overflow-hidden">
-                <img 
-                  src={selectedImage.src} 
+                <img
+                  src={selectedImage.src}
                   alt={selectedImage.alt}
                   className="w-full h-full object-cover"
                 />

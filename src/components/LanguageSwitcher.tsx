@@ -33,7 +33,7 @@ const LanguageSwitcher: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-48 bg-coal border border-gold/20 rounded-lg shadow-lg z-50">
+        <div className="absolute top-full right-0 mt-2 w-48 bg-coal shadow-lg z-50">
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -59,7 +59,6 @@ const LanguageSwitcher: React.FC = () => {
         </div>
       )}
 
-      {/* Overlay для закрытия при клике вне */}
       {isOpen && (
         <div 
           className="fixed inset-0 z-40" 

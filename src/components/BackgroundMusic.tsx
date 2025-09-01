@@ -8,14 +8,14 @@ const BackgroundMusic: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    // Автоматически запускаем музыку при загрузке
+
     if (audioRef.current) {
-      audioRef.current.volume = 0.3; // Устанавливаем тихую громкость
+      audioRef.current.volume = 0.4; 
       audioRef.current.play().then(() => {
         setIsPlaying(true);
       }).catch((error) => {
         console.log('Autoplay prevented:', error);
-        // Если автовоспроизведение заблокировано, показываем кнопку play
+
         setIsPlaying(false);
       });
     }
@@ -56,7 +56,7 @@ const BackgroundMusic: React.FC = () => {
         Your browser does not support the audio element.
       </audio>
 
-      <div className="fixed bottom-4 right-4 z-50 flex items-center space-x-2 bg-coal/80 backdrop-blur-sm border border-gold/20 rounded-lg p-3">
+      <div className="fixed bottom-4 right-4 z-50 flex items-center space-x-2 bg-coal/80 backdrop-blur-sm rounded-lg p-3">
         <button
           onClick={togglePlay}
           className="text-gold hover:text-gold-secondary transition-colors duration-300"

@@ -47,7 +47,6 @@ h1 {
 
 button {
   border-radius: 4px;
-  border: 1px solid #bfa14a;
   padding: 0.8em 1.6em;
   font-size: 1em;
   font-weight: 500;
@@ -92,7 +91,6 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #bfa14a;
   border-radius: 4px;
 }
 
@@ -105,7 +103,6 @@ button:focus-visible {
 .text-gold-secondary { color: #c8ad5b; }
 .bg-gold { background-color: #bfa14a; }
 .bg-coal { background-color: #0a0a0a; }
-.border-gold { border-color: #bfa14a; }
 
 /* Animations */
 @keyframes flicker {

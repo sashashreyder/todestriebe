@@ -59,7 +59,7 @@ const About: React.FC = () => {
 
           {/* Band Photo */}
           <div className="relative">
-            <div className="aspect-square rounded-lg border border-gold/20 overflow-hidden">
+            <div className="aspect-square rounded-lg overflow-hidden">
               <img 
                 src="/img/IMG_20240114_030134_434.jpg" 
                 alt="Todestriebe band photo" 
