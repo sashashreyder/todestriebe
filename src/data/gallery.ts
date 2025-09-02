@@ -80,3 +80,4 @@ export const galleryImages: GalleryImage[] = [
   }
 ];
 
+

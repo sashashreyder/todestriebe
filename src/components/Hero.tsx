@@ -26,11 +26,11 @@ const Hero: React.FC = () => {
           </p>
         </div>
         
-        {/* CTA Buttons - без обводки */}
+        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="px-8 py-4 text-lg font-semibold bg-gold text-coal hover:bg-gold-secondary transition-all duration-300 transform hover:scale-105">
-            {t.hero.listenNow}
-          </button>
+        <button className="px-8 py-4 text-lg font-semibold bg-gold !text-black hover:bg-gold-secondary transition-all duration-300 transform hover:scale-105">
+  {t.hero.listenNow}
+</button>
           <button className="px-8 py-4 text-lg font-semibold bg-transparent text-gold hover:bg-gold hover:text-coal transition-all duration-300 transform hover:scale-105">
             {t.hero.buyMerch}
           </button>

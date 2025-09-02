@@ -23,7 +23,6 @@ const Shop: React.FC = () => {
   ];
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  // Реальные товары с изображениями из папки
   const products = [
     { id: 'tee1', title: 'Todestriebe Tee', price: 35, image: '/img/б2т.jpg', category: 'Clothing', description: 'Black metal band t-shirt with band logo' },
     { id: 'vinyl1', title: 'LP "Abyssal Rites"', price: 29, image: '/img/б4т.jpg', category: 'Music', description: 'Limited edition vinyl record' },
@@ -49,22 +48,27 @@ const Shop: React.FC = () => {
         </div>
 
         <div className="flex justify-center mb-12">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category.key}
-                onClick={() => setSelectedCategory(category.key)}
-                className={`px-4 py-2 text-sm border border-gold/20 rounded-md transition-all duration-300 ${
-                  selectedCategory === category.key
-                    ? 'bg-gold text-coal border-gold'
-                    : 'text-gold hover:border-gold/40 hover:bg-gold/10'
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </div>
-        </div>
+  <div className="flex flex-wrap gap-2 justify-center">
+    {categories.map((category) => (
+      <button
+        key={category.key}
+        onClick={() => setSelectedCategory(category.key)}
+        className={`px-4 py-2 text-sm border border-gold/20 rounded-md transition-all duration-300
+          ${
+            category.key === 'All'
+              ? selectedCategory === 'All'
+                ? 'bg-gold text-black border-gold'
+                : 'text-black hover:border-gold/40 hover:bg-gold/10'
+              : selectedCategory === category.key
+                ? 'bg-gold text-coal border-gold'
+                : 'text-gold hover:border-gold/40 hover:bg-gold/10'
+          }`}
+      >
+        {category.label}
+      </button>
+    ))}
+  </div>
+</div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
           {filteredProducts.map((product) => (

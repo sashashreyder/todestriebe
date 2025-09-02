@@ -77,3 +77,4 @@ export const ru = {
     paused: 'На паузе'
   }
 };
+

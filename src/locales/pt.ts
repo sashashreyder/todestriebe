@@ -77,3 +77,4 @@ export const pt = {
     paused: 'Pausado'
   }
 };
+
